@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TargetEndpoint name="Acme-Bank-Payments">
+    <Description>Acme Bank Payments</Description>
+	<FaultRules>
+	</FaultRules>
+	<DefaultFaultRule>
+            <Step>
+                <Name>SF-PostflowResponseTargetLogAggregator</Name>
+            </Step>
+    	<AlwaysEnforce>true</AlwaysEnforce>
+	</DefaultFaultRule>
+	<PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>SF-PreflowRequestTargetLogAggregator</Name>
+            </Step>
+            <Step>
+                <Name>cf-Remove-Proxy-Auth-Header</Name>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+	<Flows>
+        <Flow name="CreateDomesticPaymentConsents">
+        	<Condition>(targetOperation = &quot;CreateDomesticPaymentConsents&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+        <Flow name="GetDomesticPaymentConsentsConsentId">
+        	<Condition>(targetOperation = &quot;GetDomesticPaymentConsentsConsentId&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+        <Flow name="GetDomesticPaymentConsentsConsentIdFundsConfirmation">
+        	<Condition>(targetOperation = &quot;GetDomesticPaymentConsentsConsentIdFundsConfirmation&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+        <Flow name="CreateDomesticPayments">
+        	<Condition>(targetOperation = &quot;CreateDomesticPayments&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+        <Flow name="GetDomesticPaymentsDomesticPaymentId">
+        	<Condition>(targetOperation = &quot;GetDomesticPaymentsDomesticPaymentId&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+        <Flow name="CreateInternationalPaymentConsents">
+        	<Condition>(targetOperation = &quot;CreateInternationalPaymentConsents&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+        <Flow name="GetInternationalPaymentConsentsConsentId">
+        	<Condition>(targetOperation = &quot;GetInternationalPaymentConsentsConsentId&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+        <Flow name="GetInternationalPaymentConsentsConsentIdFundsConfirmation">
+        	<Condition>(targetOperation = &quot;GetInternationalPaymentConsentsConsentIdFundsConfirmation&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+        <Flow name="CreateInternationalPayments">
+        	<Condition>(targetOperation = &quot;CreateInternationalPayments&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+        <Flow name="GetInternationalPaymentsInternationalPaymentId">
+        	<Condition>(targetOperation = &quot;GetInternationalPaymentsInternationalPaymentId&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+	</Flows>
+    <PostFlow name="PostFlow">
+        <Request>
+            <Step>
+                <Name>SF-PostflowRequestTargetLogAggregator</Name>
+            </Step>
+        </Request>
+        <Response>
+            <Step>
+                <Name>SF-PostflowResponseTargetLogAggregator</Name>
+            </Step>
+        </Response>
+    </PostFlow>
+    <HTTPTargetConnection>
+    	<LoadBalancer>
+            <Server name="Acme-Bank-Payments">
+                <IsEnabled>true</IsEnabled>
+            </Server>
+        </LoadBalancer>
+        <Path>/v1/acmebank/payments</Path>
+    </HTTPTargetConnection>
+</TargetEndpoint>
